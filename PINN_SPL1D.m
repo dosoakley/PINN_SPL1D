@@ -217,11 +217,9 @@ function z = RunStepForward(x,z,A,u,m,n,K,dt)
 %This works only for a single stream, specified as a list of distance (x) and
 %elevation (z) coordinates, starting from the stream outlet, which is
 %assumed to be at a fixed elevation.
-% %The first and last nodes of the stream have 0 erosion rate BCs.
-%Now, only the first node of the stream has the 0 erosion rate BC.
+%The first node of the stream has a 0 erosion rate BC.
 if n == 1
     z = z + u*dt; % add uplift
-    % for i = 2:numel(x)-1
     for i = 2:numel(x)
         tt = K*A(i)^m*dt/(x(i)-x(i-1));
         z(i) = (z(i) + z(i-1)*tt)/(1+tt); %Eqn. 22 of Braun and Willett (2013).
